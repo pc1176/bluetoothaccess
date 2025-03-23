@@ -1,0 +1,30 @@
+<div class="bluetooth-container">
+    <div class="bluetooth-header">
+      <h2>Bluetooth Devices</h2>
+      <button class="scan-button" (click)="scanForDevices()" [disabled]="isScanning">
+        {{ isScanning ? 'Scanning...' : 'Scan for Devices' }}
+      </button>
+    </div>
+  
+    <div class="devices-list" *ngIf="bluetoothDevices.length > 0">
+      <div class="device-item" *ngFor="let device of bluetoothDevices">
+        <div class="device-info">
+          <span class="device-name">{{ device.name }}</span>
+          <span class="device-details">
+            <small>{{ device.id.substring(0, 8) }}...</small>
+          </span>
+        </div>
+        <button 
+          class="connect-button" 
+          [class.connected]="device.connected"
+          (click)="connectToDevice(device)" 
+          [disabled]="device.connecting">
+          {{ device.connected ? 'Disconnect' : (device.connecting ? 'Connecting...' : 'Connect') }}
+        </button>
+      </div>
+    </div>
+  
+    <div class="no-devices" *ngIf="bluetoothDevices.length === 0 && !isScanning">
+      <p>No devices found. Click scan to search for nearby Bluetooth devices.</p>
+    </div>
+  </div>

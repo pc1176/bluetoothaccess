@@ -1,0 +1,33 @@
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * Delete the template below * * * * * * * * * -->
+<!-- * * * * * * * to get started with your project! * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+<div class="container">
+  <h1>Push Notification Demo</h1>
+  <div class="notification-card">
+    <h2>Browser Notifications</h2>
+    <p>Click the button below to subscribe to push notifications</p>
+    <button (click)="subscribeToNotifications()" [disabled]="!isPushAvailable">
+      {{ buttonText }}
+    </button>
+    <button (click)="sendTestNotification()" [disabled]="!isSubscribed" class="test-button">
+      Send Test Notification
+    </button>
+    <p *ngIf="subscriptionStatus" [class]="subscriptionStatus.type">
+      {{ subscriptionStatus.message }}
+    </p>
+    <p *ngIf="!isPushAvailable" class="error">
+      {{ errorMessage }}
+    </p>
+    <div *ngIf="debugInfo" class="debug-info">
+      <h3>Debug Information:</h3>
+      <pre>{{ debugInfo | json }}</pre>
+    </div>
+  </div>
+</div>
+<app-bluetoothaccess></app-bluetoothaccess>
